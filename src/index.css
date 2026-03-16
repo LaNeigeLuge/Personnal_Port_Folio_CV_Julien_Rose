@@ -1,0 +1,139 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  /* Watercolor-inspired palette */
+  --cream-paper: #F5F1E8;
+  --soft-beige: #E8DCC8;
+  --golden-amber: #D4A574;
+  --wood-ochre: #B8956A;
+  --emerald-green: #6B9B7F;
+  --sage-green: #8BAA93;
+  --pastel-blue-green: #A8C5C0;
+
+  /* Glass design system variables */
+  --glass-bg: rgba(245, 241, 232, 0.08);
+  --glass-bg-hover: rgba(245, 241, 232, 0.15);
+  --glass-bg-green: rgba(107, 155, 127, 0.12);
+  --glass-border: rgba(245, 241, 232, 0.15);
+  --glass-border-hover: rgba(107, 155, 127, 0.5);
+  --glass-blur: 24px;
+  --glass-shadow: 0 8px 32px rgba(107, 155, 127, 0.15);
+  --glass-shadow-lg: 0 16px 48px rgba(107, 155, 127, 0.25);
+
+  /* Accent colors - Emerald Green theme */
+  --accent: #6B9B7F;
+  --accent-light: #8BAA93;
+  --accent-dark: #5A8B6F;
+
+  /* Text colors */
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
+}
+
+@layer base {
+  body {
+    @apply font-dm text-white antialiased;
+    background: #0a0f0a;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-syne font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-hover:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .glass-green {
+    background: var(--glass-bg-green);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-light to-accent-dark bg-clip-text text-transparent;
+  }
+
+  .glow-ring {
+    box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3),
+                0 0 20px rgba(74, 222, 128, 0.4);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+  }
+}
+
+/* Background setup */
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.page-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(10, 15, 10, 0.7), rgba(10, 15, 10, 0.85));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 15, 10, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 222, 128, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 222, 128, 0.5);
+}
+
+/* Selection */
+::selection {
+  background: rgba(74, 222, 128, 0.3);
+  color: white;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
