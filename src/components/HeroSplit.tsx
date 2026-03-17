@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Download, Linkedin, Github, Mail } from 'lucide-react';
+import { Download, Linkedin, Github, Mail, MapPin, Globe, Briefcase, GraduationCap } from 'lucide-react';
 
 const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/julienrose/', color: '#6B9B7F' },
@@ -8,10 +8,10 @@ const socialLinks = [
 ];
 
 const quickFacts = [
-  { label: 'Location', value: 'Paris, France', emoji: '📍', color: '#D4A574' },
-  { label: 'Heritage', value: 'French & Brazilian', emoji: '🌍', color: '#6B9B7F' },
-  { label: 'Role', value: 'Cloud & IoT Architect', emoji: '💼', color: '#B8956A' },
-  { label: 'Teaching', value: 'ESILV Lecturer', emoji: '🎓', color: '#A8C5C0' },
+  { label: 'Location', value: 'Paris, France', icon: MapPin, color: '#D4A574' },
+  { label: 'Heritage', value: 'French & Brazilian', icon: Globe, color: '#6B9B7F' },
+  { label: 'Role', value: 'Cloud & IoT Architect', icon: Briefcase, color: '#B8956A' },
+  { label: 'Teaching', value: 'ESILV Lecturer', icon: GraduationCap, color: '#A8C5C0' },
 ];
 
 export default function HeroSplit() {
@@ -54,7 +54,7 @@ export default function HeroSplit() {
                   className="glass p-4 rounded-xl"
                   style={{ borderLeft: `4px solid ${fact.color}` }}
                 >
-                  <div className="text-2xl mb-1">{fact.emoji}</div>
+                  <fact.icon size={20} style={{ color: fact.color, marginBottom: '4px' }} />
                   <div className="text-xs font-medium text-white/50">{fact.label}</div>
                   <div className="text-sm font-bold text-white/90">{fact.value}</div>
                 </motion.div>

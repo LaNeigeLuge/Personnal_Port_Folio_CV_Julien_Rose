@@ -16,7 +16,7 @@ const quickFacts = [
   { label: 'Location', value: 'Paris, France', icon: MapPin, color: '#D4A574' },
   { label: 'Heritage', value: 'French & Brazilian', icon: Globe, color: '#6B9B7F' },
   { label: 'Experience', value: '4+ Years', icon: Briefcase, color: '#B8956A' },
-  { label: 'Students', value: '100+ Taught', icon: GraduationCap, color: '#A8C5C0' },
+  { label: 'Teaching', value: 'Iot/Cloud Engineer', icon: GraduationCap, color: '#A8C5C0' },
 ];
 
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
@@ -50,8 +50,12 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0, transition: { duration: 1.5, ease: 'easeInOut' } }}
+        initial={{ opacity: 1, filter: 'blur(0px)' }}
+        exit={{
+          opacity: 0,
+          filter: 'blur(20px)',
+          transition: { duration: 1, ease: 'easeInOut' }
+        }}
         className="fixed inset-0 z-50 overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #F5F1E8 0%, #E8DCC8 50%, #F5F1E8 100%)',

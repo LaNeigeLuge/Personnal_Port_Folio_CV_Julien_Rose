@@ -105,7 +105,7 @@ export default function AboutDense() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <h3 className="text-2xl font-bold text-center mb-6 text-white/90">
-            Trusted by Leading Organizations
+            I Worked with
           </h3>
           <CompanyCarousel />
         </motion.div>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import HeroSplit from './components/HeroSplit';
 import StatsSection from './components/StatsSection';
-import AboutDense from './components/AboutDense';
+import AboutRedesign from './components/AboutRedesign';
 import BentoSkills from './components/BentoSkills';
 import ExperienceDense from './components/ExperienceDense';
 import Teaching from './components/Teaching';
@@ -12,6 +12,7 @@ import PersonalProjects from './components/PersonalProjects';
 import Contact from './components/Contact';
 import ParallaxBackground from './components/ParallaxBackground';
 import IntroAnimation from './components/IntroAnimation';
+import FloatingContact from './components/FloatingContact';
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -24,23 +25,25 @@ function App() {
       {/* Parallax Background */}
       <ParallaxBackground />
 
+      {/* Floating Contact Button */}
+      {introComplete && <FloatingContact />}
+
       {/* Main Content */}
       <AnimatePresence>
         {introComplete && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, filter: 'blur(20px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
             className="relative z-10"
           >
             <Navbar />
             <HeroSplit />
-            <StatsSection />
-            <AboutDense />
-            <BentoSkills />
+            <AboutRedesign />
             <ExperienceDense />
             <Teaching />
             <Projects />
+            <BentoSkills />
             <PersonalProjects />
             <Contact />
           </motion.div>
