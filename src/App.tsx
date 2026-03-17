@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import HeroSplit from './components/HeroSplit';
 import StatsSection from './components/StatsSection';
@@ -24,18 +25,27 @@ function App() {
       <ParallaxBackground />
 
       {/* Main Content */}
-      <div className="relative z-10">
-        <Navbar />
-        <HeroSplit />
-        <StatsSection />
-        <AboutDense />
-        <BentoSkills />
-        <ExperienceDense />
-        <Teaching />
-        <Projects />
-        <PersonalProjects />
-        <Contact />
-      </div>
+      <AnimatePresence>
+        {introComplete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="relative z-10"
+          >
+            <Navbar />
+            <HeroSplit />
+            <StatsSection />
+            <AboutDense />
+            <BentoSkills />
+            <ExperienceDense />
+            <Teaching />
+            <Projects />
+            <PersonalProjects />
+            <Contact />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

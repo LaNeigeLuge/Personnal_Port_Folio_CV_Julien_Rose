@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Linkedin, Github, Mail, X } from 'lucide-react';
+import { Linkedin, Github, Mail, X, MapPin, Globe, Briefcase, GraduationCap } from 'lucide-react';
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -13,10 +13,10 @@ const socialLinks = [
 ];
 
 const quickFacts = [
-  { label: 'Location', value: 'Paris 🇫🇷', emoji: '📍', color: '#D4A574' },
-  { label: 'Heritage', value: 'French & Brazilian', emoji: '🌍', color: '#6B9B7F' },
-  { label: 'Experience', value: '4+ Years', emoji: '💼', color: '#B8956A' },
-  { label: 'Students', value: '100+ Taught', emoji: '🎓', color: '#A8C5C0' },
+  { label: 'Location', value: 'Paris, France', icon: MapPin, color: '#D4A574' },
+  { label: 'Heritage', value: 'French & Brazilian', icon: Globe, color: '#6B9B7F' },
+  { label: 'Experience', value: '4+ Years', icon: Briefcase, color: '#B8956A' },
+  { label: 'Students', value: '100+ Taught', icon: GraduationCap, color: '#A8C5C0' },
 ];
 
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
@@ -30,12 +30,12 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     }
 
     const timers = [
-      setTimeout(() => setStage(1), 800),    // Start with horizontal image
-      setTimeout(() => setStage(2), 3000),   // Rotate to vertical (slower!)
-      setTimeout(() => setStage(3), 6500),   // Blur and show name/photo
-      setTimeout(() => setStage(4), 9500),   // Split to left/right
-      setTimeout(() => setStage(5), 12000),  // Show full content
-      setTimeout(() => onComplete(), 15000), // Complete after 15s total
+      setTimeout(() => setStage(1), 300),    // Start with horizontal image (DELAY 1: adjust this)
+      setTimeout(() => setStage(2), 1200),   // Rotate to vertical (DELAY 2: adjust this - gap is 900ms)
+      setTimeout(() => setStage(3), 3500),   // Blur and show name/photo (DELAY 3: gap is 1500ms = rotation duration)
+      setTimeout(() => setStage(4), 5000),   // Split to left/right (DELAY 4: gap is 1000ms)
+      setTimeout(() => setStage(5), 6000),   // Show full content (DELAY 5: gap is 1000ms)
+      setTimeout(() => onComplete(), 12000),  // Complete (DELAY 6: gap is 1000ms before fade)
     ];
 
     return () => timers.forEach(clearTimeout);
@@ -51,7 +51,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        exit={{ opacity: 0, transition: { duration: 1.5, ease: 'easeInOut' } }}
         className="fixed inset-0 z-50 overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #F5F1E8 0%, #E8DCC8 50%, #F5F1E8 100%)',
@@ -78,55 +78,51 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
           <X size={16} className="group-hover:rotate-90 transition-transform" />
         </motion.button>
 
-        {/* Stage 1-2: Horizontal image rotating to vertical */}
-        {stage < 3 && (
+        {/* Stage 1-2-3: Horizontal image rotating to vertical then zooming */}
+        {stage < 4 && (
           <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            className="absolute inset-0 flex items-center justify-center overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="relative shadow-2xl"
-              initial={{ rotate: 180, width: '70vw', height: '40vh' }}
-              animate={stage >= 2 ? {
-                rotate: 270,
-                width: '40vh',
-                height: '70vh',
-              } : {}}
-              transition={{ duration: 2.5, ease: 'easeInOut' }}
+              className="absolute inset-0"
+              initial={{ rotate: 90 }}
+              animate={
+                stage >= 3 ? { rotate: 0, scale: 2.5 } :
+                stage >= 2 ? { rotate: 0, scale: 1 } :
+                { rotate: 90, scale: 1 }
+              }
+              transition={{ duration: 1.5, ease: 'easeInOut' }}
               style={{
                 backgroundImage: 'url(/src/assets/parallax-bg.jpg)',
-                backgroundSize: 'cover',
+                backgroundSize: 'contain',
                 backgroundPosition: 'center',
-                borderRadius: '12px',
-                border: '8px solid #F5F1E8',
+                backgroundRepeat: 'no-repeat',
+                width: '100%',
+                height: '100%',
               }}
             />
           </motion.div>
         )}
 
-        {/* Stage 3: Blur and show name + photo centered */}
+        {/* Stage 3: Show name + photo ON the zoomed image (no separate background) */}
         {stage === 3 && (
-          <motion.div className="absolute inset-0 flex items-center justify-center">
-            {/* Blurred background */}
-            <motion.div
-              className="absolute inset-0"
-              initial={{ opacity: 0, filter: 'blur(0px)' }}
-              animate={{ opacity: 1, filter: 'blur(20px)' }}
-              transition={{ duration: 0.8 }}
-              style={{
-                backgroundImage: 'url(/src/assets/parallax-bg.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            />
-            <div className="absolute inset-0" style={{ background: 'rgba(245, 241, 232, 0.7)' }} />
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Darker overlay for readability */}
+            <div className="absolute inset-0" style={{ background: 'rgba(10, 15, 10, 0.4)' }} />
 
             {/* Name and Photo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, delay: 0.5 }}
+              transition={{ duration: 1.5, delay: 0.3 }}
               className="relative z-10 text-center"
             >
               <motion.img
@@ -139,9 +135,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 className="text-5xl font-bold"
                 style={{
                   fontFamily: 'Syne, sans-serif',
-                  background: 'linear-gradient(135deg, #6B9B7F 0%, #B8956A 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: '#F5F1E8',
                 }}
               >
                 Julien Rosé
@@ -150,24 +144,15 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
           </motion.div>
         )}
 
-        {/* Stage 4: Split to left/right */}
+        {/* Stage 4: Split to left/right - background gets much darker */}
         {stage >= 4 && (
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            {/* Blurred background - darker! */}
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: 'url(/src/assets/parallax-bg.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                filter: 'blur(20px)',
-              }}
-            />
-            <div className="absolute inset-0" style={{ background: 'rgba(10, 15, 10, 0.75)' }} />
+            {/* Keep the zoomed background but make it darker */}
+            <div className="absolute inset-0" style={{ background: 'rgba(10, 15, 10, 0.85)' }} />
 
             <div className="relative z-10 h-full flex items-center justify-center p-8">
               <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -183,7 +168,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                     className="text-4xl font-bold mb-6"
                     style={{
                       fontFamily: 'Syne, sans-serif',
-                      color: '#6B9B7F'
+                      color: '#8BAA93'
                     }}
                   >
                     Who am I?
@@ -191,10 +176,10 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
 
                   <motion.p
                     className="text-lg leading-relaxed"
-                    style={{ color: '#4A4A4A' }}
+                    style={{ color: '#E8DCC8' }}
                   >
-                    <strong style={{ color: '#B8956A' }}>IoT engineer by training</strong>,
-                    <strong style={{ color: '#6B9B7F' }}> cloud architect by passion</strong>, and
+                    <strong style={{ color: '#D4A574' }}>IoT engineer by training</strong>,
+                    <strong style={{ color: '#8BAA93' }}> cloud architect by passion</strong>, and
                     <strong style={{ color: '#A8C5C0' }}> lecturer by calling</strong>.
                     I build scalable event-driven systems that connect the physical and digital worlds.
                   </motion.p>
@@ -218,7 +203,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                           borderLeft: `4px solid ${fact.color}`
                         }}
                       >
-                        <div className="text-2xl mb-1">{fact.emoji}</div>
+                        <fact.icon size={20} style={{ color: fact.color, marginBottom: '4px' }} />
                         <div className="text-xs font-medium" style={{ color: '#999' }}>
                           {fact.label}
                         </div>
@@ -249,13 +234,13 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                     className="text-4xl font-bold mb-2"
                     style={{
                       fontFamily: 'Syne, sans-serif',
-                      color: '#6B9B7F'
+                      color: '#8BAA93'
                     }}
                   >
                     Julien Rosé
                   </motion.h1>
 
-                  <p className="text-lg mb-6" style={{ color: '#B8956A' }}>
+                  <p className="text-lg mb-6" style={{ color: '#D4A574' }}>
                     Backend Cloud & IoT Architect
                   </p>
 
