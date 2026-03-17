@@ -34,8 +34,8 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
       setTimeout(() => setStage(2), 1200),   // Rotate to vertical (DELAY 2: adjust this - gap is 900ms)
       setTimeout(() => setStage(3), 3500),   // Blur and show name/photo (DELAY 3: gap is 1500ms = rotation duration)
       setTimeout(() => setStage(4), 5000),   // Split to left/right (DELAY 4: gap is 1000ms)
-      setTimeout(() => setStage(5), 6000),   // Show full content (DELAY 5: gap is 1000ms)
-      setTimeout(() => onComplete(), 12000),  // Complete (DELAY 6: gap is 1000ms before fade)
+      setTimeout(() => setStage(5), 10000),   // Show full content (DELAY 5: gap is 1000ms)
+      setTimeout(() => onComplete(), 10500),  // Complete (DELAY 6: gap is 1000ms before fade)
     ];
 
     return () => timers.forEach(clearTimeout);
@@ -91,8 +91,8 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
               initial={{ rotate: 90 }}
               animate={
                 stage >= 3 ? { rotate: 0, scale: 2.5 } :
-                stage >= 2 ? { rotate: 0, scale: 1 } :
-                { rotate: 90, scale: 1 }
+                  stage >= 2 ? { rotate: 0, scale: 1 } :
+                    { rotate: 90, scale: 1 }
               }
               transition={{ duration: 1.5, ease: 'easeInOut' }}
               style={{
