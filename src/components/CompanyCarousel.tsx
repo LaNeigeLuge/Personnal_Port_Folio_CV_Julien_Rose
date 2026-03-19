@@ -32,16 +32,16 @@ const companies = [
   },
   {
     name: 'Renault',
-    logo: null,
-    role: 'Development Engineer Intern',
-    period: 'Apr - Oct 2021',
+    logo: '/src/assets/renault.svg',
+    role: 'Robotic Simulation Engineer Intern',
+    period: 'Jul 2017 + 2018',
     color: 'from-yellow-500 to-orange-600'
   },
   {
     name: 'CY Tech',
     logo: '/src/assets/cytech.png',
-    role: 'Graduate Engineering School',
-    period: '2018 - 2021',
+    role: 'Lecturer · Embedded Systems',
+    period: '2025',
     color: 'from-blue-400 to-blue-600'
   },
 ];

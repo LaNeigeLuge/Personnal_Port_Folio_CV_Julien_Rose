@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import HeroSplit from './components/HeroSplit';
-import StatsSection from './components/StatsSection';
 import AboutRedesign from './components/AboutRedesign';
 import BentoSkills from './components/BentoSkills';
-import ExperienceDense from './components/ExperienceDense';
+import ExperienceRedesign from './components/ExperienceRedesign';
 import Teaching from './components/Teaching';
 import Projects from './components/Projects';
 import PersonalProjects from './components/PersonalProjects';
@@ -40,10 +39,8 @@ function App() {
             <Navbar />
             <HeroSplit />
             <AboutRedesign />
-            <ExperienceDense />
+            <ExperienceRedesign />
             <Teaching />
-            <Projects />
-            <BentoSkills />
             <PersonalProjects />
             <Contact />
           </motion.div>

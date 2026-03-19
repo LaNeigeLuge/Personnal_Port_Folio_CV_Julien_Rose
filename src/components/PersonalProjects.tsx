@@ -28,8 +28,8 @@ export default function PersonalProjects() {
   return (
     <section id="personal-projects" className="py-20 px-6 bg-black/20">
       <div className="container mx-auto max-w-6xl">
-        <SectionTitle subtitle="From My Studies & Personal Time">
-          Personal Projects
+        <SectionTitle >
+          Projects
         </SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

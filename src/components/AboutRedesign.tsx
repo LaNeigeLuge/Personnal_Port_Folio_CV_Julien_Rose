@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Cloud, Code, Users, Server, Database, Wifi, PenTool, MessageSquare, Target } from 'lucide-react';
+import { Cloud, Users, Wifi } from 'lucide-react';
 import GlassCard from './GlassCard';
 import SectionTitle from './SectionTitle';
 import CompanyCarousel from './CompanyCarousel';
@@ -17,9 +17,14 @@ const expertiseBlocks = [
   {
     title: 'Cloud & Backend',
     icon: Cloud,
-    description: 'Experienced in building scalable cloud architectures and event-driven backend systems',
+    description: 'Serverless architectures, IaC, and event-driven backend systems with Python',
     color: '#6B9B7F',
-    technologies: ['AWS', 'Docker', 'Terraform', 'Lambda', 'API Gateway', 'DynamoDB', 'Aurora RDS', 'S3', 'EC2', 'Cognito', 'VPC', 'VPN', 'SQLALCHEMY', 'PostgreSQL', 'MangoDB'],
+    technologies: [
+      'Python 3.12', 'SQLAlchemy', 'FastAPI', 'Terraform', 'AWS Lambda', 'API Gateway',
+      'Aurora PostgreSQL', 'DynamoDB', 'S3', 'EventBridge', 'CloudWatch', 'Cognito',
+      'CloudFront', 'SES', 'VPC', 'ECS', 'IAM', 'Secrets Manager', 'RabbitMQ',
+      'Docker', 'GitLab CI/CD', 'Metabase', 'MongoDB'
+    ],
   },
   {
     title: 'IoT & Embedded',
