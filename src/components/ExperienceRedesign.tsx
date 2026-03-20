@@ -1,7 +1,135 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { ChevronDown, MapPin, Calendar, Code, Cloud, Box, Plug, GitBranch, TestTube, Database } from 'lucide-react';
+import { ChevronDown, ChevronRight, MapPin, Calendar, Code, Cloud, Box, Plug, GitBranch, TestTube, Database, Layers, Settings, Shield, Users } from 'lucide-react';
 import SectionTitle from './SectionTitle';
+
+// Achievement Categories Component with collapsible sections
+function AchievementCategories({ categories }: { categories: any[] }) {
+  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set([0])); // First category expanded by default
+  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
+  // Color palette for each category
+  const categoryColors = [
+    '#6B9B7F', // Architecture & Design - emerald green
+    '#D4A574', // Infrastructure & DevOps - golden amber
+    '#7F9BA8', // Security & Monitoring - slate blue
+    '#C5A8B0', // Leadership & Product - dusty rose
+  ];
+
+  return (
+    <div className="space-y-3">
+      {categories.map((cat, catIndex) => {
+        const isExpanded = expandedCategories.has(catIndex);
+        const isHovered = hoveredCategory === catIndex;
+        const IconComponent = cat.icon;
+        const categoryColor = categoryColors[catIndex] || '#8BAA93';
+
+        return (
+          <div key={catIndex}>
+            {/* Category Header */}
+            <motion.button
+              onClick={() => toggleCategory(catIndex)}
+              onMouseEnter={() => setHoveredCategory(catIndex)}
+              onMouseLeave={() => setHoveredCategory(null)}
+              className="w-full flex items-center gap-2 py-2 px-3 rounded-lg transition-all duration-300 cursor-pointer relative overflow-hidden"
+              style={{
+                backgroundColor: isExpanded
+                  ? `${categoryColor}15`
+                  : isHovered
+                    ? `${categoryColor}10`
+                    : 'transparent',
+                borderLeft: isHovered || isExpanded ? `3px solid ${categoryColor}` : '3px solid transparent',
+                transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+              }}
+              whileHover={{ x: 4 }}
+              animate={!isExpanded && catIndex > 0 ? {
+                // Pulse animation for collapsed categories (except first one)
+                scale: [1, 1.01, 1],
+              } : {}}
+              transition={{
+                scale: { duration: 2, repeat: Infinity, repeatDelay: 3 },
+              }}
+            >
+              {/* Chevron with bounce animation on hover */}
+              <motion.div
+                animate={{
+                  rotate: isExpanded ? 90 : 0,
+                  x: isHovered && !isExpanded ? [0, 2, 0] : 0
+                }}
+                transition={{
+                  rotate: { duration: 0.2 },
+                  x: { duration: 0.6, repeat: isHovered && !isExpanded ? Infinity : 0 }
+                }}
+              >
+                <ChevronRight size={16} style={{ color: categoryColor }} />
+              </motion.div>
+
+              <IconComponent
+                size={16}
+                style={{
+                  color: categoryColor,
+                  filter: isHovered ? 'drop-shadow(0 0 4px currentColor)' : 'none',
+                  transition: 'filter 0.3s'
+                }}
+              />
+
+              <span className="text-sm font-bold" style={{ color: categoryColor }}>
+                {cat.category}
+              </span>
+
+              <span
+                className="text-xs ml-auto transition-colors duration-300"
+                style={{
+                  color: isHovered ? categoryColor : 'rgba(255, 255, 255, 0.4)'
+                }}
+              >
+                ({cat.achievements.length})
+              </span>
+            </motion.button>
+
+            {/* Category Achievements */}
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.ul
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-2 mt-2 ml-8 overflow-hidden"
+                >
+                  {cat.achievements.map((achievement: string, i: number) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.05 }}
+                      className="flex items-start gap-2 text-white/70 text-sm leading-relaxed"
+                    >
+                      <span style={{ color: '#8BAA93' }} className="mt-0.5">▸</span>
+                      <span>{achievement}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 const experiences = [
   {
@@ -13,19 +141,52 @@ const experiences = [
     location: 'Paris, France',
     type: 'Full-time',
     description: 'Leading serverless cloud architecture and IoT integration for European vehicle sharing platform',
-    achievements: [
-      'Design and deployment of serverless AWS infrastructure using Domain Driven Design and Event-Driven Architecture',
-      'Infrastructure as Code: Terraform 1.13 managing Lambda, API Gateway, Aurora PostgreSQL, EventBridge, CloudFront, SES, CloudWatch, VPC, ECS',
-      'Backend development: Python 3, SQLAlchemy 2.0, Alembic migrations, FastAPI with OpenAPI 3.0.3 documentation',
-      'Vehicle telematics integration: RabbitMQ (AMQP), Invers API, Mapbox cartography for real-time tracking and digital twins',
-      'CI/CD & DevOps: GitLab CI/CD pipelines, Docker multi-platform builds, SonarQube, Ruff, Pyright, Bandit, TFLint, Checkov',
-      'Security & monitoring: AWS Secrets Manager, IAM, Session Manager, CloudWatch Logs, Metabase dashboards'
+    achievementCategories: [
+      {
+        category: 'Architecture & Design',
+        icon: Layers,
+        achievements: [
+          'Domain-Driven Design applied to multi-tenant SaaS: bounded contexts, aggregates, and service boundaries in a vehicle fleet platform',
+          'Event-driven system design: defining event schemas, ownership boundaries, and async communication patterns between microservices',
+          'Technical architecture decision-making: ADR writing, trade-off analysis between synchronous vs asynchronous flows, and microservice deployment strategies',
+          'Digital twin modeling for connected vehicles: defining real-time state representation from CAN bus and telematics events'
+        ]
+      },
+      {
+        category: 'Infrastructure & DevOps',
+        icon: Settings,
+        achievements: [
+          'Design and deployment of serverless AWS infrastructure using Domain Driven Design and Event-Driven Architecture',
+          'Infrastructure as Code: Terraform managing Lambda, API Gateway, Aurora PostgreSQL, EventBridge, CloudFront, SES, CloudWatch, VPC, ECS',
+          'Vehicle telematics integration: RabbitMQ (AMQP), Invers API, Mapbox cartography for real-time tracking and digital twins',
+          'CI/CD & DevOps: GitLab CI/CD pipelines, Docker multi-platform builds, SonarQube, Ruff, Pyright, Bandit, TFLint, Checkov',
+          'Automated database snapshot/restore strategy for staging and production environments with pre-test and pre-release backup workflows',
+          'Database design and optimization: PostgreSQL with SQLAlchemy ORM, complex joins, and performance tuning for real-time queries'
+        ]
+      },
+      {
+        category: 'Security & Monitoring',
+        icon: Shield,
+        achievements: [
+          'Security & monitoring: AWS Secrets Manager, IAM, Session Manager, CloudWatch Logs, Metabase dashboards',
+          'Network security: VPC isolation, security groups, private subnets, NAT gateways, and SSL/TLS encryption'
+        ]
+      },
+      {
+        category: 'Leadership & Product',
+        icon: Users,
+        achievements: [
+          'Technical Product Owner: facilitation of business workshops, translation of operator requirements into functional and technical specifications',
+          'Cross-functional collaboration with business stakeholders, operations teams, and external API providers',
+          'Technical mentoring and onboarding: ramping up a frontend developer, supervising technical choices, and conducting code reviews'
+        ]
+      }
     ],
     techStack: {
       'Backend & Core': {
         icon: Code,
         color: '#6B9B7F',
-        technologies: ['Python 3.12', 'Poetry', 'SQLAlchemy 2.0', 'Alembic', 'Psycopg 3.2']
+        technologies: ['Python 3', 'Poetry', 'SQLAlchemy', 'Alembic', 'Psycopg']
       },
       'Cloud & AWS': {
         icon: Cloud,
@@ -35,12 +196,12 @@ const experiences = [
       'Infrastructure': {
         icon: Box,
         color: '#A8C5C0',
-        technologies: ['Terraform 1.13', 'Docker', 'Docker Buildx', 'GitLab Runner EC2']
+        technologies: ['Terraform', 'Docker', 'EC2']
       },
       'API & Integration': {
         icon: Plug,
         color: '#8BAA93',
-        technologies: ['OpenAPI 3.0.3', 'PyJWT 2.10', 'Requests-OAuthlib', 'Boto3 1.40', 'OVH API', 'RabbitMQ (AMQP)', 'Invers API', 'Mapbox']
+        technologies: ['OpenAPI', 'PyJWT', 'OAuthlib', 'OVH', 'RabbitMQ (AMQP)', 'Telematics API', 'Mapbox']
       },
       'CI/CD & DevOps': {
         icon: GitBranch,
@@ -50,12 +211,12 @@ const experiences = [
       'Testing & Analytics': {
         icon: TestTube,
         color: '#C5A8B0',
-        technologies: ['Behave (BDD)', 'Metabase', 'CloudWatch Logs']
+        technologies: ['Behave (BDD)', 'Metabase', 'CloudWatch']
       },
       'Data': {
         icon: Database,
         color: '#7F9BA8',
-        technologies: ['PostgreSQL', 'PyYAML 6.0', 'JSON']
+        technologies: ['PostgreSQL', 'PyYAML', 'JSON']
       }
     }
   },
@@ -294,20 +455,27 @@ export default function ExperienceRedesign() {
                               ></span>
                               Key Achievements
                             </h4>
-                            <ul className="space-y-2">
-                              {exp.achievements.map((achievement, i) => (
-                                <motion.li
-                                  key={i}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ duration: 0.3, delay: i * 0.05 }}
-                                  className="flex items-start gap-2 text-white/70 text-sm leading-relaxed"
-                                >
-                                  <span style={{ color: '#8BAA93' }} className="mt-0.5">▸</span>
-                                  <span>{achievement}</span>
-                                </motion.li>
-                              ))}
-                            </ul>
+
+                            {/* Categorized Achievements (if available) */}
+                            {'achievementCategories' in exp && exp.achievementCategories ? (
+                              <AchievementCategories categories={exp.achievementCategories} />
+                            ) : (
+                              /* Fallback for simple achievements array */
+                              <ul className="space-y-2">
+                                {'achievements' in exp && exp.achievements?.map((achievement, i) => (
+                                  <motion.li
+                                    key={i}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                                    className="flex items-start gap-2 text-white/70 text-sm leading-relaxed"
+                                  >
+                                    <span style={{ color: '#8BAA93' }} className="mt-0.5">▸</span>
+                                    <span>{achievement}</span>
+                                  </motion.li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
 
                           {/* Tech Stack */}
@@ -325,6 +493,7 @@ export default function ExperienceRedesign() {
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {Object.entries(exp.techStack).map(([category, data]) => {
                                   const IconComponent = data.icon;
+                                  const categoryColor = data.color || '#8BAA93';
                                   return (
                                     <motion.div
                                       key={category}
@@ -333,13 +502,13 @@ export default function ExperienceRedesign() {
                                       transition={{ duration: 0.3 }}
                                       className="rounded-xl p-4"
                                       style={{
-                                        backgroundColor: 'rgba(107, 155, 127, 0.08)',
-                                        border: '1px solid rgba(107, 155, 127, 0.2)',
+                                        backgroundColor: `${categoryColor}30`,
+                                        border: `1px solid ${categoryColor}50`,
                                       }}
                                     >
                                       <div className="flex items-center gap-2 mb-3">
-                                        <IconComponent size={16} style={{ color: '#8BAA93' }} />
-                                        <h5 className="text-xs font-bold" style={{ color: '#8BAA93' }}>
+                                        <IconComponent size={16} style={{ color: categoryColor }} />
+                                        <h5 className="text-xs font-bold" style={{ color: categoryColor }}>
                                           {category}
                                         </h5>
                                       </div>
@@ -349,9 +518,9 @@ export default function ExperienceRedesign() {
                                             key={tech}
                                             className="px-2 py-0.5 text-xs rounded font-medium"
                                             style={{
-                                              backgroundColor: 'rgba(107, 155, 127, 0.15)',
-                                              border: '1px solid rgba(107, 155, 127, 0.25)',
-                                              color: '#A8C5C0',
+                                              backgroundColor: `${categoryColor}80`,
+                                              border: `1px solid ${categoryColor}90`,
+                                              color: 'rgba(253, 234, 234, 0.85)',
                                             }}
                                           >
                                             {tech}
