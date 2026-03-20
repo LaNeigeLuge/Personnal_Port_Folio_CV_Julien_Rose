@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Mail, X, Send, ArrowRight } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,24 +17,39 @@ export default function FloatingContact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Create mailto link
-    const subject = `Contact from ${formData.name}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    const mailtoLink = `mailto:corto.rose@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        'service_suq3iyc',      // Your Service ID
+        'template_f96qucn',     // Your Template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        '0iUbsvmLclO12JCKn'     // Your Public Key
+      );
 
-    // Open email client
-    window.location.href = mailtoLink;
-
-    // Reset form
-    setTimeout(() => {
-      setFormData({ email: '', name: '', message: '' });
-      setIsSubmitting(false);
+      // Success
       setSubmitStatus('success');
+      setFormData({ email: '', name: '', message: '' });
+
+      // Close form after 2 seconds
       setTimeout(() => {
         setSubmitStatus('idle');
         setIsOpen(false);
       }, 2000);
-    }, 500);
+    } catch (error) {
+      console.error('Email send error:', error);
+      setSubmitStatus('error');
+
+      // Reset error status after 3 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -207,13 +223,17 @@ export default function FloatingContact() {
                     style={{
                       background: submitStatus === 'success'
                         ? 'linear-gradient(135deg, #8BAA93 0%, #6B9B7F 100%)'
+                        : submitStatus === 'error'
+                        ? 'linear-gradient(135deg, #D46B6B 0%, #B85A5A 100%)'
                         : 'linear-gradient(135deg, #6B9B7F 0%, #5A8B6F 100%)',
                     }}
                   >
                     {isSubmitting ? (
                       'Sending...'
                     ) : submitStatus === 'success' ? (
-                      '✓ Sent!'
+                      '✓ Message sent!'
+                    ) : submitStatus === 'error' ? (
+                      '✗ Failed to send'
                     ) : (
                       <>
                         <Send size={20} />
@@ -225,7 +245,7 @@ export default function FloatingContact() {
 
                 {/* Footer Note */}
                 <p className="mt-6 text-xs text-center" style={{ color: '#999' }}>
-                  This will open your email client to send the message
+                  Your message will be sent directly to corto.rose@gmail.com
                 </p>
               </div>
             </motion.div>
