@@ -63,7 +63,7 @@ export default function HeroSplit() {
 
             {/* Download CV Button */}
             <motion.a
-              href="/src/assets/cv.pdf"
+              href="/assets/cv.pdf"
               download="Julien_Rose_CV.pdf"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function HeroSplit() {
             className="flex flex-col items-center justify-center"
           >
             <motion.img
-              src="/src/assets/profile.jpg"
+              src="/assets/profile.jpg"
               alt="Julien Rosé"
               className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl mb-6"
               style={{ border: '6px solid #6B9B7F' }}

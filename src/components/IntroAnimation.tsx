@@ -100,7 +100,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
               }
               transition={{ duration: 1.5, ease: 'easeInOut' }}
               style={{
-                backgroundImage: 'url(/src/assets/parallax-bg.jpg)',
+                backgroundImage: 'url(/assets/parallax-bg.jpg)',
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -130,7 +130,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
               className="relative z-10 text-center"
             >
               <motion.img
-                src="/src/assets/profile.jpg"
+                src="/assets/profile.jpg"
                 alt="Julien Rosé"
                 className="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-2xl"
                 style={{ border: '4px solid #6B9B7F' }}
@@ -227,7 +227,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                   className="flex flex-col items-center justify-center"
                 >
                   <motion.img
-                    src="/src/assets/profile.jpg"
+                    src="/assets/profile.jpg"
                     alt="Julien Rosé"
                     className="w-48 h-48 rounded-full object-cover shadow-2xl mb-6"
                     style={{ border: '6px solid #6B9B7F' }}

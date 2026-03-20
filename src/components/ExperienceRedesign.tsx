@@ -134,7 +134,7 @@ function AchievementCategories({ categories }: { categories: any[] }) {
 const experiences = [
   {
     company: 'Circle Mobility',
-    logo: '/src/assets/circle.jpg',
+    logo: '/assets/circle.jpg',
     logoColor: 'pastel-purple', // Will apply purple tint
     role: 'Backend Cloud Engineer & IoT Architect',
     period: 'Dec 2024 - Present',
@@ -222,7 +222,7 @@ const experiences = [
   },
   {
     company: 'ESILV',
-    logo: '/src/assets/esilv.jpg',
+    logo: '/assets/esilv.jpg',
     logoColor: 'pastel-pink',
     role: 'Lecturer - Cloud IoT / AWS IoT',
     period: 'Jan 2024 - Present',
@@ -239,7 +239,7 @@ const experiences = [
   },
   {
     company: 'Smile Open Source Solutions',
-    logo: '/src/assets/smile.png',
+    logo: '/assets/smile.png',
     logoColor: 'yellowish-orange', // Will apply orange tint
     role: 'IoT Research & Development Engineer',
     period: '2021 - 2024',
@@ -257,7 +257,7 @@ const experiences = [
   },
   {
     company: 'LBDC - Les bequilles du cognitif',
-    logo: '/src/assets/lbdc.jpeg',
+    logo: '/assets/lbdc.jpeg',
     logoColor: 'blue',
     role: 'Fractional CTO',
     period: '2022 - 2024',
@@ -274,7 +274,7 @@ const experiences = [
   },
   {
     company: 'Infotel',
-    logo: '/src/assets/infotel.png',
+    logo: '/assets/infotel.png',
     logoColor: 'blue',
     role: 'Development Engineer Internship',
     period: 'Apr - Oct 2021',
@@ -295,7 +295,7 @@ const experiences = [
   },
   {
     company: 'Renault Group',
-    logo: '/src/assets/renault.svg',
+    logo: '/assets/renault.svg',
     logoColor: 'yellow',
     role: 'Robotic Simulation Engineer Internship',
     period: 'Jul 2017 + 2018',

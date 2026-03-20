@@ -51,7 +51,7 @@ export default function PersonalProjects() {
                     </div>
                   ) : (
                     <img
-                      src={`/src/assets/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}.jpg`}
+                      src={`/assets/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}.jpg`}
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />

@@ -4,42 +4,42 @@ import { useEffect, useState } from 'react';
 const companies = [
   {
     name: 'Circle Mobility',
-    logo: '/src/assets/circle.jpg',
+    logo: '/assets/circle.jpg',
     role: 'Backend Cloud & IoT Architect',
     period: 'Dec 2024 - Present',
     color: 'from-blue-500 to-cyan-500'
   },
   {
     name: 'ESILV',
-    logo: '/src/assets/esilv.jpg',
+    logo: '/assets/esilv.jpg',
     role: 'Lecturer · Cloud, IoT & Networks',
     period: 'Jan 2024 - Present',
     color: 'from-pink-500 to-rose-500'
   },
   {
     name: 'Smile',
-    logo: '/src/assets/smile.png',
+    logo: '/assets/smile.png',
     role: 'IoT R&D Engineer for GRDF',
     period: '2021 - 2024',
     color: 'from-orange-500 to-red-500'
   },
   {
     name: 'GRDF',
-    logo: '/src/assets/grdf.png',
+    logo: '/assets/grdf.png',
     role: 'Industrial IoT Platform',
     period: '2021 - 2024 (via Smile)',
     color: 'from-blue-600 to-indigo-600'
   },
   {
     name: 'Renault',
-    logo: '/src/assets/renault.svg',
+    logo: '/assets/renault.svg',
     role: 'Robotic Simulation Engineer Intern',
     period: 'Jul 2017 + 2018',
     color: 'from-yellow-500 to-orange-600'
   },
   {
     name: 'CY Tech',
-    logo: '/src/assets/cytech.png',
+    logo: '/assets/cytech.png',
     role: 'Lecturer · Embedded Systems',
     period: '2025',
     color: 'from-blue-400 to-blue-600'

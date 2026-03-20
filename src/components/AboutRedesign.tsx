@@ -150,7 +150,7 @@ export default function AboutRedesign() {
                 style={{ backgroundColor: 'rgba(212, 165, 116, 0.2)' }}
               >
                 <img
-                  src="/src/assets/aws-solutions-architect.webp"
+                  src="/assets/aws-solutions-architect.webp"
                   alt="AWS"
                   className="w-12 h-12 object-contain"
                   style={{

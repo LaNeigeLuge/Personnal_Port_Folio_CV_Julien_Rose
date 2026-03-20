@@ -38,7 +38,7 @@ export default function Hero() {
             <GlassCard className="p-2 animate-float">
               <div className="relative">
                 <img
-                  src="/src/assets/profile.jpg"
+                  src="/assets/profile.jpg"
                   alt="Julien Rosé"
                   className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover glow-ring"
                 />
@@ -141,7 +141,7 @@ export default function Hero() {
             </button>
 
             <a
-              href="/src/assets/cv.pdf"
+              href="/assets/cv.pdf"
               download="Julien_Rose_CV.pdf"
               className="glass glass-hover px-8 py-4 rounded-full font-medium text-white hover:text-accent transition-all flex items-center gap-2"
             >

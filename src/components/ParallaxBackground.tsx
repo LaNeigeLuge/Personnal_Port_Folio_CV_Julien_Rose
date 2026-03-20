@@ -24,7 +24,7 @@ export default function ParallaxBackground() {
     <div
       className="page-background"
       style={{
-        backgroundImage: 'url(/src/assets/parallax-bg.jpg)',
+        backgroundImage: 'url(/assets/parallax-bg.jpg)',
         backgroundPosition: `center ${imageOffset}%`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
