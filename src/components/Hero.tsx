@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
-import { Download, ChevronDown } from 'lucide-react';
+import { Download, ChevronDown, Linkedin, Github, Mail } from 'lucide-react';
 import GlassCard from './GlassCard';
+
+const socialLinks = [
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/julienrose/', color: '#6B9B7F', isExternal: true },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/LaNeigeLuge', color: '#B8956A', isExternal: true },
+  { icon: Mail, label: 'Contact', href: '#', color: '#A8C5C0', isExternal: false, tooltip: 'corto.rose@gmail.com\n+33 7 81 44 62 29' },
+];
 
 export default function Hero() {
   const scrollToWork = () => {
@@ -38,6 +44,57 @@ export default function Hero() {
                 />
               </div>
             </GlassCard>
+
+            {/* Social Links under photo */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex gap-3 justify-center mt-4"
+            >
+              {socialLinks.map((social, index) => (
+                <motion.div
+                  key={social.label}
+                  className="relative group"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                >
+                  <motion.a
+                    href={social.href}
+                    target={social.isExternal ? "_blank" : undefined}
+                    rel={social.isExternal ? "noopener noreferrer" : undefined}
+                    onClick={!social.isExternal ? (e) => e.preventDefault() : undefined}
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center glass glass-hover"
+                    style={{ color: social.color }}
+                  >
+                    <social.icon size={20} />
+                  </motion.a>
+
+                  {/* Tooltip for contact info */}
+                  {social.tooltip && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div
+                        className="px-4 py-2 rounded-lg shadow-xl backdrop-blur-md whitespace-pre-line text-center"
+                        style={{
+                          backgroundColor: 'rgba(139, 170, 147, 0.95)',
+                          color: 'white',
+                          fontSize: '14px',
+                          fontWeight: '500'
+                        }}
+                      >
+                        {social.tooltip}
+                      </div>
+                      <div
+                        className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-8 border-transparent"
+                        style={{ borderTopColor: 'rgba(139, 170, 147, 0.95)' }}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Hero Text */}

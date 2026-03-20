@@ -7,9 +7,9 @@ interface IntroAnimationProps {
 }
 
 const socialLinks = [
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/julienrose/', color: '#6B9B7F' },
-  { icon: Github, label: 'GitHub', href: 'https://github.com/LaNeigeLuge', color: '#B8956A' },
-  { icon: Mail, label: 'Contact', href: 'https://www.linkedin.com/in/julienrose/', color: '#A8C5C0' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/julienrose/', color: '#6B9B7F', isExternal: true },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/LaNeigeLuge', color: '#B8956A', isExternal: true },
+  { icon: Mail, label: 'Contact', href: '#', color: '#A8C5C0', isExternal: false, tooltip: 'corto.rose@gmail.com\n+33 7 81 44 62 29' },
 ];
 
 const quickFacts = [
@@ -251,11 +251,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                   {/* Social Media Links */}
                   <div className="flex gap-4">
                     {socialLinks.map((social, index) => (
-                      <motion.a
+                      <motion.div
                         key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        className="relative group"
                         initial={{ scale: 0, rotate: -180 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{
@@ -263,15 +261,43 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                           delay: 0.8 + index * 0.1,
                           type: 'spring'
                         }}
-                        whileHover={{ scale: 1.2, rotate: 10 }}
-                        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm"
-                        style={{
-                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                          color: social.color
-                        }}
                       >
-                        <social.icon size={24} />
-                      </motion.a>
+                        <motion.a
+                          href={social.href}
+                          target={social.isExternal ? "_blank" : undefined}
+                          rel={social.isExternal ? "noopener noreferrer" : undefined}
+                          onClick={!social.isExternal ? (e) => e.preventDefault() : undefined}
+                          whileHover={{ scale: 1.2, rotate: 10 }}
+                          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm"
+                          style={{
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            color: social.color
+                          }}
+                        >
+                          <social.icon size={24} />
+                        </motion.a>
+
+                        {/* Tooltip for contact info */}
+                        {social.tooltip && (
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                            <div
+                              className="px-4 py-2 rounded-lg shadow-xl backdrop-blur-md whitespace-pre-line text-center"
+                              style={{
+                                backgroundColor: 'rgba(139, 170, 147, 0.95)',
+                                color: 'white',
+                                fontSize: '14px',
+                                fontWeight: '500'
+                              }}
+                            >
+                              {social.tooltip}
+                            </div>
+                            <div
+                              className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-8 border-transparent"
+                              style={{ borderTopColor: 'rgba(139, 170, 147, 0.95)' }}
+                            />
+                          </div>
+                        )}
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>

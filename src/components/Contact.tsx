@@ -7,8 +7,8 @@ const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'Contact via LinkedIn',
-    href: 'https://www.linkedin.com/in/julienrose/',
+    value: 'corto.rose@gmail.com',
+    href: 'mailto:corto.rose@gmail.com',
   },
   {
     icon: Linkedin,

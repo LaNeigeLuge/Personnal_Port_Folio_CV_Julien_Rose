@@ -245,14 +245,15 @@ const experiences = [
     period: '2021 - 2024',
     location: 'Asnieres-sur-Seine, France',
     type: 'Full-time',
-    description: 'Industrial IoT platform for GRDF (now in production and actively used)',
+    description: 'Industrial IoT platform architecture on AWS for connected gas meter fleet management (now in production and actively used)',
     achievements: [
       'Backend development: Python and AWS microservices (Lambda, S3, DynamoDB) within a team of 15',
       'Architecture & integration: Ingestion and orchestration of multiple APIs integrating GRDF group services',
       'Real-time monitoring: Production supervision and incident management for critical infrastructure',
-      'Agile methodology: Sprint planning, code reviews, and continuous delivery'
+      'Agile methodology: Sprint planning, code reviews, and continuous delivery',
+      'Real time telemetry data processing: Designed digital twin representation for connected gas meters handling telemetry events, remote operations, and FOTA updates with OpenSearch analytics'
     ],
-    tech: ['Python', 'AWS Lambda', 'S3', 'DynamoDB', 'MQTT', 'Docker', 'Git']
+    tech: ['Python', 'AWS Lambda', 'S3', 'DynamoDB', 'MQTT', 'Docker', 'Git', 'Angular', 'IoT Core', 'OpenSearch', '']
   },
   {
     company: 'LBDC - Les bequilles du cognitif',
@@ -279,14 +280,18 @@ const experiences = [
     period: 'Apr - Oct 2021',
     location: 'Saint-Mande, France',
     type: 'Internship',
-    description: 'FullStack development with Angular/Node.js/MongoDB and IoT connected calendar project',
+    description: 'End-of-study internship: Team management application with MEAN stack architecture and IoT integration',
     achievements: [
-      'FullStack application development with Angular, Node.js, and MongoDB',
-      'Database creation and migration',
+      'Full-stack team management application: UI/UX design and screen creation with Angular front-end',
+      'Requirements gathering: specification documentation and client needs analysis',
+      'Team leadership: managed 4 developers throughout the project lifecycle',
+      'MEAN stack architecture design: MongoDB, Express.js, Angular, and Node.js implementation',
+      'Database design: MongoDB schema creation and data migration strategies',
+      'Product presentation and client demonstrations',
       'IoT project: Connected calendars integration',
-      'End-of-study internship project'
+      'Deployment to production: application successfully launched and used by end of internship'
     ],
-    tech: ['Angular', 'Node.js', 'MongoDB', 'IoT', 'FullStack']
+    tech: ['Angular', 'Node.js', 'Express.js', 'MongoDB', 'MEAN Stack', 'UI/UX Design', 'Team Management', 'IoT']
   },
   {
     company: 'Renault Group',
@@ -298,11 +303,13 @@ const experiences = [
     type: 'Internship',
     description: 'Robotic simulation for assembly lines at Renault do Brasil',
     achievements: [
-      'Robotic arm programming (coding, simulation, debugging)',
-      'Assembly line management with simulation software (ROBCAD, Project Simulate)',
-      'International experience in Brazil'
+      'Implementation of the new Kwid body assembly on the automated production line',
+      'Robotic arm programming: coding, simulation, and debugging for body welding operations',
+      'Assembly line management and optimization with ROBCAD and Project Simulate software',
+      'Robotized production chain integration and validation',
+      'International experience in Brazil working with production engineering teams'
     ],
-    tech: ['ROBCAD', 'Project Simulate', 'Robotics', 'Simulation']
+    tech: ['ROBCAD', 'Project Simulate', 'Robotics', 'Automation', 'Manufacturing Engineering']
   },
 ];
 

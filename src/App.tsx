@@ -41,7 +41,7 @@ function App() {
             <AboutRedesign />
             <ExperienceRedesign />
             <Teaching />
-            <PersonalProjects />
+            {/* <PersonalProjects /> */}
             <Contact />
           </motion.div>
         )}
