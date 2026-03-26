@@ -175,3 +175,146 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* ===================================
+   MODERN ANIMATIONS (from references)
+   =================================== */
+
+/* Float animation - from Portfolio 1 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse animation for badges */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Watercolor blob animation */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(20px, 10px) scale(1.05);
+  }
+}
+
+.animate-blob {
+  animation: blob 8s ease-in-out infinite;
+}
+
+.animate-blob-slow {
+  animation: blob 10s ease-in-out infinite;
+}
+
+/* Modern hover effects - from Portfolio 1 */
+.modern-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 10px 25px rgba(107, 155, 127, 0.2),
+    0 0 0 1px rgba(107, 155, 127, 0.1);
+}
+
+/* Glow effect - from Portfolio 1 */
+.glow-effect {
+  box-shadow:
+    0 0 20px rgba(107, 155, 127, 0.1),
+    0 0 40px rgba(107, 155, 127, 0.05);
+}
+
+.glow-effect:hover {
+  box-shadow:
+    0 0 30px rgba(107, 155, 127, 0.2),
+    0 0 60px rgba(107, 155, 127, 0.1),
+    0 2px 0 rgba(107, 155, 127, 0.3);
+}
+
+/* Grid background pattern - from Portfolio 1 */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(107, 155, 127, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 155, 127, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Gradient border animation */
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-border {
+  position: relative;
+  background: var(--glass-bg);
+  border-radius: 1rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(45deg,
+    rgba(107, 155, 127, 0.5),
+    rgba(212, 165, 116, 0.5),
+    rgba(168, 197, 192, 0.5),
+    rgba(107, 155, 127, 0.5));
+  background-size: 200% 200%;
+  border-radius: inherit;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-border 3s ease infinite;
+}
+
+/* Stagger animation helper */
+.stagger-item {
+  animation: stagger-fade-in 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes stagger-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -44,8 +44,21 @@ const expertiseBlocks = [
 
 export default function AboutRedesign() {
   return (
-    <section id="about" className="py-20 px-6">
-      <div className="container mx-auto max-w-7xl">
+    <section id="about" className="py-20 px-6 relative overflow-hidden">
+      {/* Grid Pattern Background */}
+      <div className="absolute inset-0 grid-pattern opacity-30" />
+
+      {/* Floating Shapes */}
+      <div className="absolute top-20 right-10 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl animate-pulse" />
+      <div className="absolute top-60 left-20 w-20 h-20 bg-amber-500/20 rounded-lg rotate-45 animate-bounce" />
+      <div className="absolute bottom-40 right-1/4 w-16 h-16 bg-emerald-500/15 rounded-full animate-ping" />
+      <div className="absolute bottom-20 left-1/3 w-24 h-24 bg-blue-400/10 rounded-lg rotate-12 float-animation" />
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/3 right-1/2 translate-x-1/2 w-80 h-80 bg-gradient-to-r from-emerald-500/20 via-amber-500/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 left-1/4 w-60 h-60 bg-gradient-to-l from-blue-400/15 via-emerald-500/10 to-transparent rounded-full blur-2xl" />
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <SectionTitle>My Expertise</SectionTitle>
 
         {/* Two Column Layout: Bio + 3 Expertise Blocks */}
@@ -87,8 +100,9 @@ export default function AboutRedesign() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -4 }}
               >
-                <GlassCard hover className="p-6">
+                <GlassCard hover className="p-6 modern-hover glow-effect">
                   {/* Header with Icon */}
                   <div className="flex items-start gap-4 mb-3">
                     <div

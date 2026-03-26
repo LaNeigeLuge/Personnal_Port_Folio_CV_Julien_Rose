@@ -16,8 +16,38 @@ const quickFacts = [
 
 export default function HeroSplit() {
   return (
-    <section id="hero" className="min-h-screen flex items-center px-6 relative">
-      <div className="container mx-auto max-w-7xl py-20">
+    <section id="hero" className="min-h-screen flex items-center px-6 relative overflow-hidden">
+      {/* Grid Pattern Background */}
+      <div className="absolute inset-0 grid-pattern opacity-50" />
+
+      {/* Floating Shapes (Phase 2) */}
+      <div className="absolute top-20 left-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-xl animate-pulse" />
+      <div className="absolute top-40 right-20 w-24 h-24 bg-amber-500/20 rounded-lg rotate-45 animate-bounce" />
+      <div className="absolute bottom-32 left-1/4 w-16 h-16 bg-emerald-500/15 rounded-full animate-ping" />
+      <div className="absolute bottom-20 right-1/3 w-20 h-20 bg-blue-400/10 rounded-lg rotate-12 float-animation" />
+
+      {/* Gradient Orbs (Phase 2) */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-emerald-500/20 via-amber-500/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-l from-blue-400/15 via-emerald-500/10 to-transparent rounded-full blur-2xl" />
+
+      <div className="container mx-auto max-w-7xl py-20 relative z-10">
+        {/* Badge animé - inspired by Portfolio Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center mb-8"
+        >
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full backdrop-blur-md shadow-lg border border-emerald-500/30"
+            style={{ backgroundColor: 'rgba(107, 155, 127, 0.15)' }}>
+            <div className="relative flex h-2 w-2">
+              <span className="animate-pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </div>
+            <span className="text-sm font-medium text-white">AWS Certified • 4+ Years Experience</span>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
           {/* LEFT: Bio + Quick Facts */}
@@ -167,6 +197,54 @@ export default function HeroSplit() {
           </motion.div>
 
         </div>
+
+        {/* Stats Section - inspired by Portfolio Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-white/10"
+        >
+          {[
+            { value: '4+', label: 'Years Experience', color: '#6B9B7F' },
+            { value: '15+', label: 'AWS Services', color: '#D4A574' },
+            { value: '10+', label: 'Projects Delivered', color: '#A8C5C0' },
+            { value: '900+', label: 'Students Taught', color: '#B8956A' }
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="text-center p-4 rounded-xl backdrop-blur-sm modern-hover"
+              style={{
+                background: `linear-gradient(135deg, ${stat.color}15 0%, ${stat.color}25 100%)`,
+                border: `1px solid ${stat.color}40`
+              }}
+            >
+              <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: stat.color }}>
+                {stat.value}
+              </div>
+              <div className="text-xs md:text-sm text-white/70 font-medium">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Scroll Indicator - inspired by Portfolio 1 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="flex flex-col items-center gap-2 mt-12 text-white/50"
+        >
+          <span className="text-sm font-medium">Scroll to explore</span>
+          <div className="w-6 h-10 border-2 border-emerald-500/30 rounded-full flex justify-center p-1">
+            <div className="w-1 h-3 bg-emerald-500 rounded-full animate-bounce"></div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
