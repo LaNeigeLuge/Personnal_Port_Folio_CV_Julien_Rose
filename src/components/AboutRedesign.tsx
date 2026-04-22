@@ -107,7 +107,7 @@ export default function AboutRedesign() {
                   <div className="flex items-start gap-4 mb-3">
                     <div
                       className="p-3 rounded-lg"
-                      style={{ backgroundColor: `${block.color}20` }}
+                      style={{ backgroundColor: `${block.color}50` }}
                     >
                       <block.icon size={24} style={{ color: block.color }} />
                     </div>
@@ -154,7 +154,7 @@ export default function AboutRedesign() {
           <div
             className="max-w-md mx-auto rounded-2xl p-4 backdrop-blur-md"
             style={{
-              background: 'linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(107, 155, 127, 0.15) 100%)',
+              background: 'linear-gradient(135deg, rgba(80, 62, 43, 0.62) 0%, rgba(107, 155, 127, 0.15) 100%)',
               border: '1px solid rgba(212, 165, 116, 0.3)',
             }}
           >
